@@ -51,6 +51,18 @@ Recent comments widget
 cackle_recent_comments 
 ```
 
+Rake tasks
+==========
+First time import. Warning clears all comments in base.
+```
+cackle:import
+```
+
+Syncronize changes. Should be called every 5 minutes by cron.
+```
+cackle:sync
+```
+
 License
 -------
 This project rocks and uses MIT-LICENSE.
