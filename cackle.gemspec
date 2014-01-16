@@ -13,7 +13,7 @@ Gem::Specification.new do |s|
   s.summary     = "Cackle.me comments synchronization."
   s.description = "Sync cackle's comments with local database and render with page for SEO optimization."
 
-  s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.rdoc"]
+  s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.md"]
   s.test_files = Dir["test/**/*"]
 
   s.add_dependency "rails", "~> 4.0.0"
