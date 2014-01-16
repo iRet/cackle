@@ -1,7 +1,7 @@
 Cackle.me integration
 =====================
 
-Simple plugin implements synchronization of Cackle.me comments.
+Simple Rails plugin implements synchronization of Cackle.me comments.
 
 Cackle.me is a real-time comment system with the ability to login 
 via popular social networks such as Google+, Facebook, Twitter, 
@@ -13,7 +13,6 @@ Installation
 ------------
 
 Add to Gemfile 
-
 ```ruby
 gem 'cackle' 
 ```
