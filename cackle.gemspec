@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   s.version     = Cackle::VERSION
   s.authors     = ["Artyom Nikolaev"]
   s.email       = ["artyom@a22.in"]
-  s.homepage    = "http://a22.in"
+  s.homepage    = "http://github.com/iRet/cackle"
   s.summary     = "Cackle.me comments synchronization."
   s.description = "Sync cackle's comments with local database and render with page for SEO optimization."
 
