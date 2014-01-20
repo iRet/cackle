@@ -1,4 +1,4 @@
-class CackleMigrationGenerator < Rails::Generators::Base 
+class Cackle::MigrationGenerator < Rails::Generators::Base 
   require 'rails/generators'
   require 'rails/generators/migration'     
 

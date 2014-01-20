@@ -1,15 +1,24 @@
 require 'open-uri'
 
 namespace :cackle do
+  
+  def say text
+    if Rails.env.development?
+      puts text
+    end
+  end
+  
   def load_config
-    @config = YAML::load(File.open('config/cackle.yml'))
+    begin
+      @config = YAML::load(File.open('config/cackle.yml'))
+    rescue Errno::ENOENT
+      raise "Create config/cackle.yml first"
+    end
     @path = "http://cackle.me/api/comment/mutable_list?siteApiKey=#{@config['site_api_key']}&accountApiKey=#{@config['account_api_key']}"
-    raise "Create config/cackle.yml first" unless @config
-    
-    puts "will use: "
-    puts @config['site_id']
-    puts @config['site_api_key']
-    puts @config['account_api_key']
+    say "will use: "
+    say @config['site_id']
+    say @config['site_api_key']
+    say @config['account_api_key']
   end
   
   def create_comment c
@@ -35,7 +44,7 @@ namespace :cackle do
       comment.anonym_email    = c['anonym']['email']
     end
     if comment.save
-      puts "created #{comment.comment_id}"
+      say "created #{comment.comment_id}"
     end
   end
 
@@ -52,8 +61,8 @@ namespace :cackle do
       comments.each do |c|
         create_comment c
       end 
-    end while (comments.size == 100)  
-    puts "Total #{CackleComment.count} in base"
+    end while (comments.size == 100)
+    say "Total #{CackleComment.count} in base"
   end
   
   desc 'Synchronize comments database'
@@ -63,7 +72,7 @@ namespace :cackle do
     max = CackleComment.maximum('updated_at')
     raise "run bootstrap first" unless max
     
-    puts "maximum found in base: #{max}"
+    say "maximum found in base: #{max}"
     @url = @path + "&modified=#{max.to_i*1000}"
 
     response = open(@url).read
@@ -73,14 +82,14 @@ namespace :cackle do
       comment = CackleComment.find_by_comment_id(c['id'])
       if comment
         if (time = Time.strptime((c['modified'][0..9]).to_s, "%s")) > comment.updated_at
-          puts "updating: #{c['id']}"
+          say "updating: #{c['id']}"
           comment.update_attributes( 
             message:    c['message'],
             status:     c['status'],
             updated_at: time)
           comment.save
         else
-          puts "comment: #{c['id']} already exist"
+          say "comment: #{c['id']} already exist"
         end
       else
         create_comment c

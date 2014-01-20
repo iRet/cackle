@@ -19,11 +19,17 @@ gem 'cackle'
 
 Generate and run migration
 ```
-rails g cacke_migration
+rails g cackle:migration
 rake db:migrate
 ```
+
+Copy views for customization (optional)
+```
+rails g cackle:views
+```
+
 Create config file config/cackle.yml
-See http://cackle.me/help/comment-sync to get your keys
+See http://cackle.me/help/comment-sync to find your keys
 
 ```yml
 site_id:         12345          # Site ID
