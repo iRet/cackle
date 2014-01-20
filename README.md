@@ -23,7 +23,7 @@ rails g cackle:migration
 rake db:migrate
 ```
 
-Copy views for customization (optional)
+Copy views to app/views for customization (optional)
 ```
 rails g cackle:views
 ```
