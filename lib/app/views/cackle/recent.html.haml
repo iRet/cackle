@@ -45,18 +45,3 @@
                 - else
                   · #{date.strftime("%d.%m")}
                 = date.strftime("%H:%M")
-
-:javascript
-  var mcSite = '#{@config['site_id']}';
-  var mcSize = '#{@config['recent']['mcSize']}';
-  var mcAvatarSize = '#{@config['recent']['mcAvatarSize']}';;
-  var mcTextSize = '#{@config['recent']['mcTextSize']}';
-  var mcTitleSize = '#{@config['recent']['mcTitleSize']}';
-  var mcJqueryOff = #{@config['recent']['mcJqueryOff']};
-  (function() {
-      var mc = document.createElement('script');
-      mc.type = 'text/javascript';
-      mc.async = true;
-      mc.src = 'http://cackle.me/mc.last-min.js';
-      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(mc);
-  })();

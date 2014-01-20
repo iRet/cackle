@@ -35,7 +35,6 @@ recent:                         # configuretion for recent comments block
   mcAvatarSize:  32             # size of avatar image in pixels
   mcTextSize:    150            # length of message block if more shorten with '...'
   mcTitleSize:   40             # title length
-  mcJqueryOff:   true        # Disable including jQuery if you already have it loaded
 ```
 
 Helper methods
