@@ -28,14 +28,14 @@ See http://cackle.me/help/comment-sync to get your keys
 ```yml
 site_id:         12345          # Site ID
 site_api_key:    blah-blah-blah # Account API Key
-account_api_key: blah-blah-blah # Site API Key
-jquery_off:      true           # Disable including jQuery if you already have it loaded
+account_api_key: blah-blah-blah # Site API Key  
 
 recent:                         # configuretion for recent comments block
   mcSize:        10             # how many comments to display
   mcAvatarSize:  32             # size of avatar image in pixels
   mcTextSize:    150            # length of message block if more shorten with '...'
   mcTitleSize:   40             # title length
+  mcJqueryOff:   true        # Disable including jQuery if you already have it loaded
 ```
 
 Helper methods
