@@ -16,8 +16,8 @@
   #mc-link{color:#555!important;font-size:11px!important;clear:both!important;float:right;text-decoration:none!important}
   #mc-link:hover{color:#333!important}
   .mc-recent-thumb img{
-    width: #{@config['recent']['mcAvatarSize']}px;
-    height: #{@config['recent']['mcAvatarSize']}px;
+    width: #{options[:avatar_size]}px;
+    height: #{options[:avatar_size]}px;
   } 
 #mc-last
   .mc-last-content
@@ -37,9 +37,9 @@
                     %span.mc-recent-author= comment.author_name
                 - else
                   %span.mc-recent-author= comment.anonym_name
-              %p.mc-recent-text= link_to comment.message.truncate(@config['recent']['mcTextSize']), comment.url + "#mc-#{comment.id}"
+              %p.mc-recent-text= link_to comment.message.truncate(options[:text_size]), comment.url + "#mc-#{comment.id}"
               %p.mc-recent-meta
-                = link_to comment.title.truncate(@config['recent']['mcTitleSize']), comment.url, title: comment.title
+                = link_to comment.title.truncate(options[:title_size]), comment.url, title: comment.title
                 - unless 1.month.ago > (date = comment.created_at)
                   · #{time_ago_in_words date} назад 
                 - else

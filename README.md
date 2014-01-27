@@ -35,12 +35,6 @@ See http://cackle.me/help/comment-sync to find your keys
 site_id:         12345          # Site ID
 site_api_key:    blah-blah-blah # Account API Key
 account_api_key: blah-blah-blah # Site API Key  
-
-recent:                         # configuretion for recent comments block
-  mcSize:        10             # how many comments to display
-  mcAvatarSize:  32             # size of avatar image in pixels
-  mcTextSize:    150            # length of message block if more shorten with '...'
-  mcTitleSize:   40             # title length
 ```
 
 Helper methods
@@ -52,7 +46,11 @@ cackle_comments
 ```
 Recent comments widget
 ```ruby
-cackle_recent_comments 
+cackle_recent_comments
+```
+You can easily specify ammount of comments to show and other params. For example:
+```ruby
+cackle_recent_comments 10, avatar_size: 32, text_size: 150, title_size: 40 
 ```
 
 Rake tasks
