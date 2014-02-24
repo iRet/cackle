@@ -5,13 +5,13 @@
         %li{ id: "cackle-comment-#{comment.comment_id}" }
           #cackle-comment-header.cackle-comment-header
             %cite{ id: "cackle-cite-#{comment.comment_id}" }
-              -if comment.author_name
+              - if comment.author_name
                 = link_to comment.author_name, '#', target: '_blank', id: comment.comment_id, rel: 'nofollow'
-              -else
+              - else
                 %span{ id: "cackle-author-user-#{comment.comment_id}" }= comment.author_name
           .cackle-comment-body{ id: "cackle-comment-body-#{comment.comment_id}" }
             .cackle-comment-message{ id: "cackle-comment-message-#{comment.comment_id}" }= comment.message
-            
+
 :javascript
    var href = window.location.href;
    if (href.indexOf('?') > 0) {
