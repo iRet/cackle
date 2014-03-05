@@ -8,17 +8,17 @@ namespace :cackle do
     end
   end
 
-  def load_config
+  def build_path
     begin
-      @config = YAML::load(File.open('config/cackle.yml'))
+      config = YAML::load(File.open('config/cackle.yml'))
     rescue Errno::ENOENT
-      raise "Create config/cackle.yml first"
+      fail 'Create config/cackle.yml first'
     end
-    @path = "http://cackle.me/api/comment/mutable_list?siteApiKey=#{@config['site_api_key']}&accountApiKey=#{@config['account_api_key']}"
-    say "will use: "
-    say @config['site_id']
-    say @config['site_api_key']
-    say @config['account_api_key']
+    say 'Will use: '
+    say config['site_id']
+    say config['site_api_key']
+    say config['account_api_key']
+    "http://cackle.me/api/comment/mutable_list?siteApiKey=#{config['site_api_key']}&accountApiKey=#{config['account_api_key']}"
   end
 
   def create_comment c
@@ -51,11 +51,11 @@ namespace :cackle do
   desc 'Initial comment base load'
   task import: :environment do
     CackleComment.delete_all
-    load_config
+    path = build_config
     begin 
       max      = CackleComment.maximum('created_at')
-      @url     = max ? @path + "&modified=#{max.to_i*1000}" : @path
-      response = open(@url).read
+      url     = max ? path + "&modified=#{max.to_i*1000}" : path
+      response = open(url).read
       json     = JSON.parse(response)
       comments = json['comments']
       comments.each do |c|
@@ -66,16 +66,16 @@ namespace :cackle do
   end
 
   desc 'Synchronize comments database'
-  task sync: :environment do
-    load_config
-
+  task fetch: :environment do
+    path = build_path
     max = CackleComment.maximum('updated_at')
-    raise "run bootstrap first" unless max
-    
-    say "maximum found in base: #{max}"
-    @url = @path + "&modified=#{max.to_i*1000}"
 
-    response = open(@url).read
+    fail 'run cackle:import first' unless max
+
+    say "maximum found in base: #{max}"
+    url = path + "&modified=#{max.to_i*1000}"
+
+    response = open(url).read
     json     = JSON.parse(response)
 
     json['comments'].each do |c|
