@@ -1,13 +1,13 @@
 require 'open-uri'
 
 namespace :cackle do
-  
+
   def say text
     if Rails.env.development?
       puts text
     end
   end
-  
+
   def load_config
     begin
       @config = YAML::load(File.open('config/cackle.yml'))
@@ -20,7 +20,7 @@ namespace :cackle do
     say @config['site_api_key']
     say @config['account_api_key']
   end
-  
+
   def create_comment c
     comment = CackleComment.new(
       comment_id: c['id'],
@@ -50,21 +50,21 @@ namespace :cackle do
 
   desc 'Initial comment base load'
   task import: :environment do
-    CackleComment.delete_all   
-    load_config  
+    CackleComment.delete_all
+    load_config
     begin 
       max      = CackleComment.maximum('created_at')
       @url     = max ? @path + "&modified=#{max.to_i*1000}" : @path
       response = open(@url).read
-      json     = JSON.parse(response)    
-      comments = json['comments']     
+      json     = JSON.parse(response)
+      comments = json['comments']
       comments.each do |c|
         create_comment c
-      end 
+      end
     end while (comments.size == 100)
     say "Total #{CackleComment.count} in base"
   end
-  
+
   desc 'Synchronize comments database'
   task sync: :environment do
     load_config
@@ -77,13 +77,13 @@ namespace :cackle do
 
     response = open(@url).read
     json     = JSON.parse(response)
-    
+
     json['comments'].each do |c|
       comment = CackleComment.find_by_comment_id(c['id'])
       if comment
         if (time = Time.strptime((c['modified'][0..9]).to_s, "%s")) > comment.updated_at
           say "updating: #{c['id']}"
-          comment.update_attributes( 
+          comment.update_attributes(
             message:    c['message'],
             status:     c['status'],
             updated_at: time)
@@ -95,5 +95,5 @@ namespace :cackle do
         create_comment c
       end
     end
-  end  
+  end
 end
