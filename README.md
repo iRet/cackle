@@ -14,7 +14,7 @@ Installation
 
 Add to Gemfile 
 ```ruby
-gem 'cackle' 
+gem 'cackle', github: 'iRet/cackle'
 ```
 
 Generate and run migration
