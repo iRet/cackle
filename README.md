@@ -34,7 +34,7 @@ See http://cackle.me/help/comment-sync to find your keys
 ```yml
 site_id:         12345          # Site ID
 site_api_key:    blah-blah-blah # Account API Key
-account_api_key: blah-blah-blah # Site API Key  
+account_api_key: blah-blah-blah # Site API Key
 ```
 
 Helper methods
@@ -42,7 +42,7 @@ Helper methods
 
 Insert comments widget
 ```ruby
-cackle_comments 
+cackle_comments
 ```
 Recent comments widget
 ```ruby
@@ -62,7 +62,7 @@ cackle:import
 
 Syncronize changes. Should be called every 5 minutes by cron.
 ```
-cackle:sync
+cackle:fetch
 ```
 
 License
