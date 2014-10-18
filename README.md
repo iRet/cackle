@@ -14,7 +14,7 @@ Installation
 
 Add to Gemfile 
 ```ruby
-gem 'cackle' 
+gem 'cackle', github: 'iRet/cackle'
 ```
 
 Generate and run migration
@@ -57,12 +57,12 @@ Rake tasks
 ==========
 First time import. Warning clears all comments in base.
 ```
-cackle:import
+rake cackle:import
 ```
 
 Syncronize changes. Should be called every 5 minutes by cron.
 ```
-cackle:fetch
+rake cackle:fetch
 ```
 
 License
