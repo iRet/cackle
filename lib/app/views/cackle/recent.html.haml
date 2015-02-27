@@ -29,7 +29,7 @@
               = link_to comment.author_www, target: '_blank' do
                 %span.mc-recent-thumb= image_tag(comment.author_avatar, alt: comment.author_name)
             - else
-              %span.mc-recent-thumb= image_tag('http://cackle.me/static/img/anonym.png', alt: comment.anonym_name)
+              %span.mc-recent-thumb= image_tag('//e.cackle.me/widget/img/anonym.png', alt: comment.anonym_name)
             .mc-recent-body
               %div
                 - if comment.author_name
